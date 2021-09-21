@@ -1,0 +1,17 @@
+{% extends 'TP5/template.html.twig' %}
+
+{% block title %}TP5 HomePage{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <h1>Hello News</h1>
+
+    {% for new in news %}
+    <div class="container">
+        <p>{{ new }}</p>
+    </div>
+    {% endfor %}
+
+</div>
+{% endblock %}
