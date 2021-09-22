@@ -1,0 +1,21 @@
+{% extends 'TP5/template.html.twig' %}
+
+{% block title %}TP5 Contact{% endblock %}
+
+{% block body %}
+
+<div class="container px-5">
+  <div class="col-6">
+    <h1>Souhait : {{ wish.title }} </h1>
+
+        <ul class="list-group">
+            <li class="list-group-item">{{ wish.title }}</li>
+            <li class="list-group-item">{{ wish.description }}</li>
+            <li class="list-group-item">{{ wish.author }}</li>
+            <li class="list-group-item">{{ wish.isPublished }}</li>
+            <li class="list-group-item">{{ wish.dateCreated|date('Y-m-d') }}</li>
+        </ul>
+  </div>
+</div>
+
+{% endblock %}

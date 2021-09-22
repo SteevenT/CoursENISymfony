@@ -2,9 +2,15 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
+use App\Entity\Wish;
+use App\Form\WishType;
+use App\Repository\WishRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class TP5Controller extends AbstractController
 {
@@ -48,5 +54,65 @@ class TP5Controller extends AbstractController
         return $this->render('tp5/about.html.twig', [
             'activeAbout' => $activeAbout,
         ]);
+    }
+
+
+
+    //Route Gestion Wish
+    /**
+     * @Route("/tp5/wish", name="tp5-wish")
+     */
+    public function wish(WishRepository $repo): Response
+    {
+        $tab = $repo->findAll();
+
+        return $this->render('tp5/wish.html.twig', [
+            'tab' => $tab,
+        ]);
+    }
+
+    /**
+     * @Route("/tp5/detail/{id}", name="tp5-detail")
+     */
+    public function detail(Wish $wish): Response
+    {
+        return $this->render('tp5/detail.html.twig', [
+            'wish' => $wish,
+        ]);
+    }
+
+    /**
+     * @Route("/tp5/delete/{id}", name="tp5-delete")
+     */
+    public function delete(Wish $wish, EntityManagerInterface $em): Response
+    {
+        // $em = $this->getDoctrine()->getManager();
+        $em->remove($wish);
+        $em->flush();
+        return $this->redirectToRoute('tp5-wish');
+    }
+
+    /**
+     * @Route("/tp5/addWish", name="tp5-add")
+     */
+    public function ajouter(Request $request): Response
+    {
+        $wish = new Wish();
+        // associe obj personne au Form.
+        $formWish = $this->createForm(WishType::class,$wish);
+        // hydraté $personne en fct du formulaire
+        $formWish->handleRequest($request);
+
+        // si le form est validé.
+        if ($formWish->isSubmitted()){
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($wish);
+            $em->flush();
+            // je redirige
+            return $this->redirectToRoute('tp5-wish');
+        }
+
+        return $this->render('tp5/ajouter.html.twig',
+            ['formWish'=> $formWish->createView()]);
     }
 }
