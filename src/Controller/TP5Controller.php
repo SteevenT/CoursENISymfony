@@ -115,4 +115,27 @@ class TP5Controller extends AbstractController
         return $this->render('tp5/ajouter.html.twig',
             ['formWish'=> $formWish->createView()]);
     }
+
+    /**
+     * @Route("/tp5/editWish/{id}", name="tp5-edit")
+     */
+    public function edit(Wish $wish, Request $request): Response
+    {
+        // associe obj personne au Form.
+        $formWish = $this->createForm(WishType::class,$wish);
+        // hydraté $personne en fct du formulaire
+        $formWish->handleRequest($request);
+
+        // si le form est validé.
+        if ($formWish->isSubmitted()){
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($wish);
+            $em->flush();
+            // je redirige
+            return $this->redirectToRoute('tp5-wish');
+        }
+
+        return $this->render('tp5/edit.html.twig',
+            ['formWish'=> $formWish->createView()]);
+    }
 }
