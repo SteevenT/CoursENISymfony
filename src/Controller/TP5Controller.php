@@ -105,6 +105,9 @@ class TP5Controller extends AbstractController
 
         // si le form est validé.
         if ($formWish->isSubmitted()){
+            $wish->setDateCreated(new \DateTime('now'));
+            $wish->setIsPublished(true);
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($wish);
             $em->flush();
@@ -128,6 +131,7 @@ class TP5Controller extends AbstractController
 
         // si le form est validé.
         if ($formWish->isSubmitted()){
+            $wish->setIsPublished(true);
             $em = $this->getDoctrine()->getManager();
             $em->persist($wish);
             $em->flush();

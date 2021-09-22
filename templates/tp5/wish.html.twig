@@ -20,16 +20,16 @@
                 <td>{{ wish.title }}</td>
                 <td>{{ wish.author }}</td>
                 <td>
-                    <a href="{{ path('tp5-detail',{id: wish.id}) }}" class="btn btn-primary">voir</a>
+                    <a href="{{ path('tp5-detail',{id: wish.id}) }}" class="btn btn-primary">Voir</a>
                 </td>
                 <td>
                     <a href="{{ path('tp5-edit',{id: wish.id}) }}" class="btn btn-success">
-                        <i class="fa fa-edit"></i>
+                        <i class="fa fa-edit">Editer</i>
                     </a>
                 </td>
                 <td>
                     <a href="{{ path('tp5-delete',{id: wish.id}) }}" class="btn btn-danger">
-                        <i class="fa fa-trash"></i>
+                        <i class="fa fa-trash">Supprimer</i>
                     </a>
 
                 </td>
@@ -38,7 +38,7 @@
         </tbody>
     </table>
     <a href="{{ path('tp5-add') }}" class="btn btn-success">
-        <i class="fa fa-plus"></i>
+        <i class="fa fa-plus">Nouveau</i>
     </a> 
   </div>
 </div>
