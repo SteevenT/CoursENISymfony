@@ -65,7 +65,7 @@ class TP5Controller extends AbstractController
     public function wish(WishRepository $repo): Response
     {
         $tab = $repo->findAll();
-
+        //dd($tab);
         return $this->render('tp5/wish.html.twig', [
             'tab' => $tab,
         ]);

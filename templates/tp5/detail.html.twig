@@ -1,4 +1,4 @@
-{% extends 'TP5/template.html.twig' %}
+{% extends 'temp/template.html.twig' %}
 
 {% block title %}TP5 Contact{% endblock %}
 
@@ -11,6 +11,7 @@
         <ul class="list-group">
             <li class="list-group-item">{{ wish.title }}</li>
             <li class="list-group-item">{{ wish.description }}</li>
+            <li class="list-group-item">{{ wish.categorie.name }}</li>
             <li class="list-group-item">{{ wish.author }}</li>
             <li class="list-group-item">{{ wish.dateCreated|date('Y-m-d') }}</li>
         </ul>

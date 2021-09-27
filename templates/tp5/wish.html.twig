@@ -1,4 +1,4 @@
-{% extends 'TP5/template.html.twig' %}
+{% extends 'temp/template.html.twig' %}
 
 {% block title %}TP5 Contact{% endblock %}
 
@@ -11,6 +11,7 @@
         <thead>
           <tr>
               <th>Titre</th>
+              <th>Catégorie</th>
               <th>Auteur</th>
           </tr>
         </thead>
@@ -18,6 +19,7 @@
           {% for wish in tab %}
             <tr>
                 <td>{{ wish.title }}</td>
+                <td>{{ wish.categorie.name }}</td>
                 <td>{{ wish.author }}</td>
                 <td>
                     <a href="{{ path('tp5-detail',{id: wish.id}) }}" class="btn btn-primary">Voir</a>
